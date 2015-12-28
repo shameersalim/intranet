@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">{{ title }}</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+
+  <div class="col-lg-12 col-sm-12">
+    <div class="panel panel-default" ng-class="{'panel-danger' : isDeleteButtonEnabled}">
+      <div class="panel-heading">{{ subTitle }}</div>
+      <div class="panel-body">
+        <form class="form-horizontal" name="employeeForm" novalidate>
+          <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label class="col-sm-2 control-label" for="inputUsername">Username</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputUsername" name="username" ng-model="employee.username"
+              placeholder="Username" required type="text" ng-readonly="isViewOnly">
+            </div>
+            <span ng-show="form.username.$error.required && form.username.$error.dirty">Please enter a username</span>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputEmail">Email</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputEmail" name="email" ng-model="employee.email"
+              placeholder="Email" required type="email" ng-readonly="isViewOnly">
+            </div>
+            <span ng-show="form.email.$error.required && form.email.$error.dirty">Please enter a email address</span>
+            <span ng-show="form.email.$error.email && form.email.$error.dirty">Please enter a valid email address</span>
+          </div>
+          <div class="form-group"  ng-show="isActionButtonEnabled">
+            <label class="col-sm-2 control-label" for="inputPassword">Password</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputPassword" name="password" ng-model="employee.password"
+              placeholder="Password" required type="password"  ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.password.$error.required && form.password.$error.dirty">Please enter a password</div>
+          </div>
+          <div class="form-group"  ng-show="isActionButtonEnabled">
+            <label class="col-sm-2 control-label" for="inputConfirmPassword">Confirm Password</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputConfirmPassword" name="confirmPassword" ng-model="employee.confirmPassword"
+              placeholder="Confirm Password" required type="password" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.confirmPassword.$error.required && form.confirmPassword.$error.dirty">Please enter a password</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputFirstName">First Name</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputFirstName" name="firstName" ng-model="employee.firstName"
+              placeholder="First Name" required type="text" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.firstName.$error.required && form.firstName.$error.dirty">Please enter first name</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputLastName">Last Name</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputLastName" name="lastName" ng-model="employee.lastName"
+              placeholder="Last Name" required type="text" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.lastName.$error.required && form.lastName.$error.dirty">Please enter last name</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputDesignation">Position</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputDesignation" name="designation" ng-model="employee.designation"
+              placeholder="Position" required type="text" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.designation.$error.required && form.designation.$error.dirty">Please enter designation</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="selectLocation">Location</label>
+            <div class="col-sm-5">
+              <select class="form-control" id="selectLocation" name="location" ng-model="employee.location" required
+               ng-disabled="isViewOnly" ng-options="item as item for item in locationList">
+              </select>
+            </div>
+            <div ng-show="form.location.$error.required && form.location.$error.dirty">Please enter location</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputOfficePhone">Office Phone Number</label>
+            <div class="col-sm-3">
+              <input class="form-control" id="inputOfficePhone" name="officePhone" ng-model="employee.officePhoneNo"
+              placeholder="Office Phone Number" required type="number" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.officePhone.$error.required && form.officePhone.$error.dirty">Please enter office phone number</div>
+            <div class="col-sm-2">
+              <input class="form-control" id="inputExtension" name="extension" ng-model="employee.officePhoneExt"
+              placeholder="Extension" required type="number" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.extension.$error.required && form.extension.$error.dirty">Please enter office extension</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputCellPhone">Cell Phone Number</label>
+            <div class="col-sm-5">
+              <input class="form-control" id="inputCellPhone" name="cellPhone" ng-model="employee.cellPhoneNo"
+              placeholder="Cell Phone Number" required type="number" ng-readonly="isViewOnly">
+            </div>
+            <div ng-show="form.cellPhone.$error.required && form.cellPhone.$error.dirty">Please enter cell phone number</div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputAdmin">Admin Access</label>
+            <div class="col-sm-5">
+              <input id="inputAdmin" name="admin" ng-model="employee.admin" type="checkbox"  ng-readonly="isViewOnly">
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="panel-footer">
+          <button class="btn btn-default" ng-click="saveEmployee()" ng-show="loggedInUser.admin &amp;&amp; isActionButtonEnabled" type="submit">{{ submitButtonLabel }}</button>
+          <button class="btn btn-default" ng-click="resetForm()" ng-show="loggedInUser.admin &amp;&amp; isActionButtonEnabled">Reset</button>
+          <button class="btn btn-danger" ng-click="deleteEmployee()" ng-show="loggedInUser.admin &amp;&amp; isDeleteButtonEnabled">Delete Employee</button>
+          <div ng-class="{ 'pull-right' : !isViewOnly }">
+            <button class="btn btn-default" ng-click="back()" ng-show="loggedInUser.admin">Back</button>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

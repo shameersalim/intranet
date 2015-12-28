@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Employee Directory</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+
+  <div class="col-lg-12 col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">All Employees</div>
+      <div class="panel-body">
+        <div class="table-responsive">
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>Emp Id</th>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Location</th>
+              <th>Office Phone</th>
+              <th>Extension</th>
+              <th>Cell Phone</th>
+              <th>Email Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="employee in employeeList" ng-class="{'selectedRow':$index == selectedRow}" ng-click="rowClickHandler($index)">
+              <td>{{ employee.employeeId }}</td>
+              <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+              <td>{{ employee.designation }}</td>
+              <td>{{ employee.location }}</td>
+              <td>{{ employee.officePhoneNo }}</td>
+              <td>{{ employee.officePhoneExt }}</td>
+              <td>{{ employee.cellPhoneNo }}</td>
+              <td>{{ employee.email }}</td>
+            </tr>
+            <tbody></table></div>
+          </div>
+          <div class="panel-footer">
+            <button class="btn btn-default" ng-show="loggedInUser.admin" ng-click="addEmployee()">Add</button>
+            <button class="btn btn-default" ng-show="loggedInUser.admin" ng-disabled="(selectedRow == -1)" ng-click="editEmployee(selectedRow)">Edit</button>
+              <button class="btn btn-default" ng-show="loggedInUser.admin" ng-disabled="(selectedRow == -1)" ng-click="viewEmployeeDetails(selectedRow)">View</button>
+            <button class="btn btn-danger" ng-show="loggedInUser.admin" style="margin-left:20px"  ng-disabled="(selectedRow == -1)" ng-click="deleteEmployee(selectedRow)">Delete</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
